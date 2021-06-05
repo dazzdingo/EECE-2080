@@ -38,9 +38,6 @@ void display(){
    }
 }
 
-int exit(){
-    return 0;
-}
 
 int main()
 {
@@ -60,8 +57,8 @@ int main()
 	 case 3: display();
 		 break;
 	 case 4: 
-	 cout << "Wrong selection! Please try again!";
-     exit();
+	   cout << "Wrong selection! Please try again!";
+      break ();
       }
    }
 
