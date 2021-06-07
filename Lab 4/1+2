@@ -1,0 +1,253 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// A linked list node
+class Node
+{
+    public:
+    int data;
+    struct Node *next;
+};
+
+
+// adds an item to the front of the list
+void AddItemFront(Node** head_ref, int new_data)
+{
+    // allocate node
+    Node* new_node = new Node();
+ 
+    // put in the data
+    new_node->data = new_data;
+ 
+    // make next of new node as head
+    new_node->next = (*head_ref);
+ 
+    // move the head to point to the new node
+    (*head_ref) = new_node;
+}
+
+// adds an item to the end of the list
+void AddItemEnd(Node** head_ref, int new_data)
+{
+    // allocate node
+    Node* new_node = new Node();
+ 
+    Node *last = *head_ref; /* used in step 5*/
+ 
+    // put in the data
+    new_node->data = new_data;
+ 
+    // This new node is going to be the last node, so make next of it as NULL
+    new_node->next = NULL;
+ 
+    // If the Linked List is empty, then make the new node as head 
+    if (*head_ref == NULL)
+    {
+        *head_ref = new_node;
+        return;
+    }
+ 
+    // Else traverse till the last node
+    while (last->next != NULL)
+        last = last->next;
+ 
+    // change the next of last node
+    last->next = new_node;
+    return;
+}
+
+// removes and returns the item in the list
+void GetItem(Node** head_ref, int key)
+{
+     
+    // Store head node
+    Node* temp = *head_ref;
+    Node* prev = NULL;
+     
+    // If head node itself holds the key to be deleted
+    if (temp != NULL && temp->data == key)
+    {
+        *head_ref = temp->next; // Changed head
+        delete temp;         // free old head
+        return;
+    }
+ 
+    // Else Search for the key to be deleted, keep track of the previous node as we need to change 'prev->next'
+      else
+    {
+    while (temp != NULL && temp->data != key)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+ 
+    // If key was not present in linked list
+    if (temp == NULL){
+      cout<<"\n"<<key<<" is not in the list."; 
+      return;
+    }
+        
+ 
+    // Unlink the node from linked list
+    prev->next = temp->next;
+ 
+    // Free memory
+    delete temp;
+    }
+}
+
+// Function to remove the first node of the linked list
+Node* GetItemFront(struct Node* head)
+{
+    if (head == NULL)
+        return NULL;
+ 
+    // Move the head pointer to the next node
+    Node* temp = head;
+    head = head->next;
+ 
+    delete temp;
+ 
+    return head;
+}
+
+// returns a bool indicating if the given item is in the list.
+bool IsInlist(Node* head, int x)
+{
+    Node* current = head; // Initialize current
+    while (current != NULL)
+    {
+        if (current->data == x)
+            return true;
+        current = current->next;
+    }
+    return false;
+}
+
+// returns a bool indicating if the list is empty.
+bool IsEmpty(Node* head)
+{
+    Node* current = head; // Initialize current
+    while (current == NULL)
+    {
+      return true;
+    }
+    return false;
+}
+
+// returns an int indicating the number of items in the list.
+int Size(Node* head)
+{
+    int count = 0; // Initialize count
+    Node* current = head; // Initialize current
+    while (current != NULL)
+    {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
+
+// finds an item at a location in the list (int passed in from user), and returns the item without removing it.
+int SeeAt(Node* head, int index)
+{
+ 
+    Node* current = head;
+ 
+    // the index of the node we're currently looking at
+    int count = 0;
+    while (current != NULL) {
+        if (count == index-1)
+            return (current->data);
+        count++;
+        current = current->next;
+    } 
+    // if we get to this line, the caller was asking for a non-existent element so we assert fail
+    assert(0);
+}
+
+
+// prints contents of linked list starting from head
+void Print(Node *node)
+{
+    while (node != NULL)
+    {
+        cout<<" "<<node->data;
+        node = node->next;
+    }
+}
+
+
+
+
+int main()
+{
+  Node* head = NULL;
+
+   int value, choice;
+
+   while(1){
+      printf("\n\n***** MENU *****\n");
+      printf("1.  AddItemFront\n2.  AddItemEnd\n3.  GetItem\n4.  GetItemFront\n5.  IsInlist\n6.  IsEmpty\n7.  Size\n8.  SeeNext\n9.  SeeAt\n10. Reset\n11. Print\n12. Exit");
+
+      printf("\nEnter your choice: ");
+      cin >> choice;
+      switch(choice){
+	 case 1: printf("Enter the value to be insert: ");
+		 cin >> value;
+		 AddItemFront(&head, value);
+		 break;
+
+	 case 2: printf("Enter the value to be insert: ");
+		 cin >> value;
+		 AddItemEnd(&head, value);
+		 break;
+
+	 case 3: printf("Enter the item you are looking for: ");
+		 cin >> value;
+		 GetItem(&head, value);
+     cout<<"You searched for:"<< value;
+     break;
+
+	 case 4: printf("Enter the item you are looking for: ");
+		 GetItemFront(head);
+		 break;
+
+	 case 5: printf("Enter the item you are looking for: ");
+     cin >> value;
+		 IsInlist(head, value)? cout<<value<<" is in the list." : cout<<value<<" is not in the list.";
+		 break;
+
+   case 6:
+		 IsEmpty(head)? cout<<"\nThe list is empty." : cout<<"\nThe list is not empty.";
+		 break;
+
+	 case 7: 
+		 cout<<"\nThe list has "<<Size(head)<<" item(s).";
+		 break;
+
+	 case 8: printf("Enter the item you are looking for: ");
+		 cin >> value;
+		 GetItem(&head, value);
+     cout<<"You searched for:"<< value; 
+     break;
+	 case 9: printf("Enter the value to be insert: ");
+		 cin >> value;
+		 cout << "\nThe item at location "<<value<<" is: " << SeeAt(head, value);
+		 break;
+
+	 case 10: printf("Enter the item you are looking for: ");
+		 cin >> value;
+		 GetItem(&head, value);
+     cout<<"You searched for:"<< value;
+     break;
+
+	 case 11: cout<<"\nCreated Linked list is: ";
+    Print(head);
+		 break;
+
+	 case 12: exit(0);
+	 default: printf("\nWrong selection! Please try again!");
+      }
+   }
+}
