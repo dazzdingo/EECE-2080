@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h> 
 #include "Task1+2.h"
 
 using namespace std;
