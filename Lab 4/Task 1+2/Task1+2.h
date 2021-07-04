@@ -62,8 +62,7 @@ void AddItemEnd(Node** head_ref, int new_data)
 
 // removes and returns the item in the list
 void GetItem(Node** head_ref, int key)
-{
-     
+{    
     // Store head node
     Node* temp = *head_ref;
     Node* prev = NULL;
