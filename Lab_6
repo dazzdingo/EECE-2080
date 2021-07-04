@@ -117,6 +117,7 @@ Node *nodeWithMimumValue(Node *node) {
 
 // Delete a node
 Node *deleteNode(Node *root, int key) {
+  using namespace std::chrono_literals;
   // Find the node and delete it
   if (root == NULL)
     return root;
@@ -190,23 +191,24 @@ int main() {
   using std::chrono::duration_cast;
   using std::chrono::duration;
   using std::chrono::milliseconds;
-  auto t1 = high_resolution_clock::now();
+  
   Node *root = NULL;
   int i = 1;
-  while (i < 50001){
+   
+  auto t1 = high_resolution_clock::now();
+  while (i < 51){
     root = insertNode(root, i);
     i++;
   }
+  auto t2 = high_resolution_clock::now();
   
   printTree(root, "", true);
-  
-  auto t2 = high_resolution_clock::now();
+
   /* Getting number of milliseconds as an integer. */
     auto ms_int = duration_cast<milliseconds>(t2 - t1);
 
   /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
-
     std::cout << ms_int.count() << "ms\n";
     std::cout << ms_double.count() << "ms";
   return 0;
