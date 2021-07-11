@@ -118,7 +118,7 @@ int main()
                         exit(1);
                  default :
                         printf("\nWrong choice\n");
-                }/*End of switch*/
+                }
         }/*End of while*/
 
         return 0;
