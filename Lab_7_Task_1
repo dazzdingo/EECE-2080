@@ -10,7 +10,7 @@ struct node
 
 void insert(int item, int item_priority);
 int del();
-void display();
+void print();
 int isEmpty();
 
 void insert(int item,int item_priority)
@@ -25,7 +25,7 @@ void insert(int item,int item_priority)
         }
         tmp->info=item;
         tmp->priority=item_priority;
-        /*Queue is empty or item to be added has priority more than first element*/
+        //Queue is empty or item to be added has priority more than first element
         if( isEmpty() || item_priority < front->priority )
         {
                 tmp->link=front;
@@ -70,7 +70,7 @@ int isEmpty()
 }
 
 
-void display()
+void print()
 {
         struct node *ptr;
         ptr=front;
@@ -112,14 +112,14 @@ int main()
                         printf("\nDeleted item is %d\n",del());
                         break;
                  case 3:
-                        display();
+                        print();
                         break;
                  case 4:
                         exit(1);
                  default :
                         printf("\nWrong choice\n");
                 }
-        }/*End of while*/
+        }
 
         return 0;
 }
